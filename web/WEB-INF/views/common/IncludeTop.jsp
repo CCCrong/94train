@@ -9,26 +9,29 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>94Train购票网</title>
-        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <!-- Hi，如果你要在自己的网站上引入bootstrap样式文件的话，请使用当前最新版本v3.0.3的CDN链接，页面加载速度会更快！-->
+        <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
         <link rel="icon" href="../../../static/images/favicon.ico">
+        <link rel="stylesheet" href="../../../static/css/dcalendar.picker.css">
+        <link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
+
+        <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+        <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../../static/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../../../static/js/jquery.min.js"></script>
         <script type="text/javascript" src="../../../static/js/scrollable.js"></script>
-        <style type="text/css">
-        .main{
-            margin-top: 10px;
-        }
+        <script type="text/javascript" src="../../../static/js/dcalendar.picker.js"></script>
 
+
+        <style type="text/css">
         .white{
             color: #ffffff;
         }
 
-        .bottom{
-            position: absolute;
-            top: 100%;
-            margin-top:-60px;
-            width: 100%;
-        }
+        .white:hover{
+            color: #cdbcf3;
 
+}
         .bac-color{
             background-color: #563d7c;
         }
@@ -41,32 +44,59 @@
             color: #ffffff;
         }
 
+        .main {
+            height: 80%;
+            position: relative;
+        }
+
+        .top,.bottom{
+            height: 10%;
+            position: relative;
+        }
+
         </style>
     </head>
 
 <body>
-<div class="bac-color">
+<div class="bac-color top">
     <div class="container">
-        <div class="row" >
+        <div class="row">
             <div class="col-xs-3">
-                <a href="/index/viewIndex.do"><img src="${pageContext.request.contextPath}/static/images/tomas.jpg" class="img-thumbnail"></a>
+                <label><a href="/index/viewIndex.do"><h1 style="color: #cdbcf3"><span class="glyphicon glyphicon-plane" style="color: #ffffff"></span>94购票网</h1></a></label>
             </div>
 
-            <div class="col-xs-6 text-center">
+            <div class="col-xs-5">
 
             </div>
 
-            <div class="col-xs-3">
-                <div >
-                    <a class="btn btn-link" href="/registerAndLogin/viewLogin.do"><h3>登录</h3></a>
-                    <a class="btn btn-link" href="/registerAndLogin/viewRegister.do"><h3>注册</h3></a>
+            <div class="col-xs-4">
+
+                <%
+                    if(session.getAttribute("S_UserID")==null)
+                    {
+                %>
+                <div>
+                    <a class="btn btn-link navbar-btn" href="/registerAndLogin/viewLogin.do"><h3>登录</h3></a>
+                    <a class="btn btn-link navbar-btn" href="/registerAndLogin/viewRegister.do"><h3>注册</h3></a>
                 </div>
-                <div style="display: none">
-                    <h3 class="white">Hi,<a class="btn btn-link" href="/user/viewUserInfo.do">xxx</a>&nbsp;<a class="btn btn-link">退出登录</a></h3>
+                <%
+                }
+                else
+                    {
+                %>
+                <div>
+                    <ul class="nav nav-pills">
+                        <li><label><h3 class="white">Hi,<a href="/user/viewUserInfo.do" class="white">${sessionScope.get("S_Username")}</a></h3></label></li>
+                        <li>&nbsp;&nbsp;</li>
+                        <li class="active" style="margin-top: 10px;"><a href="/index/viewIndex.do">我要买票</a></li>
+                        <li style="margin-top: 10px;"><button class="btn btn-link" onclick="unload()">退出登录</button></li>
+                    </ul>
+                   <% }
+                %>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="main" >
+<div class="main">
